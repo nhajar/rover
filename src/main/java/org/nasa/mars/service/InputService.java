@@ -14,13 +14,13 @@ public class InputService {
 
     public List<String> readInput(String filePath) throws IOException, InvalidInputException {
         List<String> lines = Files.readAllLines(Path.of(filePath));
-        if (lines.size()<3) {
+        if (lines.size() < 3 || lines.size() % 2 == 0) {
             throw new InvalidInputException("the file content is invalid");
         }
         return lines;
     }
 
-    public Plateau initPlateau(String[] plateauCoordinates) throws InvalidInputException{
+    public Plateau initPlateau(String[] plateauCoordinates) throws InvalidInputException {
         try {
             int maxX = Integer.parseInt(plateauCoordinates[0]);
             int maxY = Integer.parseInt(plateauCoordinates[1]);
@@ -32,19 +32,19 @@ public class InputService {
         }
     }
 
-    public Rover initRover(String[] roverPosition, Plateau plateau) throws InvalidInputException{
+    public Rover initRover(String[] roverPosition, Plateau plateau) throws InvalidInputException {
         try {
             int x = Integer.parseInt(roverPosition[0]);
             int y = Integer.parseInt(roverPosition[1]);
             String direction = roverPosition[2];
 
-            if (x < 0 ||  x >plateau.getMaxX() || y >= plateau.getMaxY() || y < 0)
+            if (x < 0 || x > plateau.getMaxX() || y >= plateau.getMaxY() || y < 0)
                 throw new InvalidInputException("First rover position is invalid x=" + x + " and y=" + y + " is invalid");
 
-            return  new Rover(x, y, Direction.valueOf(direction));
+            return new Rover(x, y, Direction.valueOf(direction));
 
-        } catch (InvalidInputException | IllegalArgumentException e ) {
+        } catch (InvalidInputException | IllegalArgumentException e) {
             throw new InvalidInputException("the rover data are invalid");
         }
     }
- }
+}

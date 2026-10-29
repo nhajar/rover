@@ -50,7 +50,7 @@ public class RoverService {
             case W -> x--;
         }
         if (x < 0 || x > plateau.getMaxX() || y < 0 || y > plateau.getMaxY()) {
-            throw new InvalidInputException("Please check your input. The rover cannot move off the plateau");
+            throw new InvalidInputException("The rover cannot move off the plateau");
         }
 
         rover.setX(x);

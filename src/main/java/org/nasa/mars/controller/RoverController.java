@@ -27,16 +27,17 @@ public class RoverController {
                 Rover rover = inputService.initRover(inputLines.get(i).split("\\s"), plateau);
                 String instructions = inputLines.get(i + 1);
                 try {
-                roverService.process(rover, instructions, plateau);
+                    roverService.process(rover, instructions, plateau);
                 } catch (InvalidInputException e) {
-                    System.out.println("Error while executing instruction "+instructions + " for rover " + rover.toString() + " "+ e.getMessage());
-                    e.printStackTrace();
+                    System.out.println("Error while executing instruction " + instructions + " for rover " + rover.toString() + " " + e.getMessage());
                 }
             }
 
-        } catch (IOException | InvalidInputException e) {
-        System.out.println("Error while loading the input File");
-        e.printStackTrace();
-    }
+        } catch (IOException e) {
+            System.out.println("Error while reading the input file: " + e.getMessage());
+
+        } catch (InvalidInputException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+        }
     }
 }
